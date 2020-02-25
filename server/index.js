@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const admin = require("firebase-admin");
 
+const { Auth } = require("../services/auth");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -25,6 +27,8 @@ const googleKey =
 admin.initializeApp({
   credential: admin.credential.cert(googleKey)
 });
+
+Auth(app, admin);
 
 // server is running
 app.listen(PORT, () => {
