@@ -1,0 +1,13 @@
+{
+  "name": "skatebayBackend",
+  "version": "1.0.0",
+  "description": "skatebay backend services",
+  "main": "index.js",
+  "repository": "git@github.com:danniolsen/skatebayBackend.git",
+  "author": "skatebay",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
