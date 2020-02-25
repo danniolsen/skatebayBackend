@@ -6,7 +6,8 @@ const VerifyIdToken = (admin, idToken) => {
     email: null,
     photo: null,
     uid: null,
-    provider: null
+    provider: null,
+    idToken: idToken
   };
 
   try {
