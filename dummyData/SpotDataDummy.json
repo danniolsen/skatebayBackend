@@ -1,0 +1,62 @@
+{
+  "spots": [
+    {
+      "spot_id": 1,
+      "spot_title": "Macba",
+      "latitude": "39.556339",
+      "longitude": "2.692114",
+      "spot_type": "Street",
+      "img_count": 3,
+      "spot_images": [
+        {
+          "img_id": 1,
+          "img_url": "https://cdn02.visitbarcelona.com/files/5531-4805-imagenCAT/BarcelonaMACBA-T24-e_O.jpg"
+        },
+        {
+          "img_id": 2,
+          "img_url": "img 2"
+        },
+        {
+          "img_id": 3,
+          "img_url": "img 3"
+        }
+      ]
+    },
+    {
+      "spot_id": 2,
+      "spot_title": "Sants",
+      "latitude": "39.558176",
+      "longitude": "2.685699",
+      "spot_type": "Street",
+      "img_count": 2,
+      "spot_images": [
+        {
+          "img_id": 4,
+          "img_url": "https://lh3.googleusercontent.com/proxy/8kx9UXoJclqKx7xm0qOy8I7L68tV-eWxSIZDyY21ajr9dX3ofKqqdF8Hzjp3zKd5zvnvratLikJZI24p7yEpMd1MP4mya-0awseHW6fn-58Axfvo5f5F_Q8"
+        },
+        {
+          "img_id": 5,
+          "img_url": "img 2"
+        }
+      ]
+    },
+    {
+      "spot_id": 3,
+      "spot_title": "Paral·lel",
+      "latitude": "39.560360",
+      "longitude": "2.672416",
+      "spot_type": "Street",
+      "img_count": 4,
+      "spot_images": [
+        {
+          "img_id": 6,
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgQ4IQcCOA4gotRsaGz6Oq9W6j1Y6kI2NIACyTB1a6ylU3KvH3"
+        },
+        {
+          "img_id": 7,
+          "img_url": "img 2"
+        }
+      ]
+    }
+  ]
+}

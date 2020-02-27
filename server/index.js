@@ -5,6 +5,7 @@ const cors = require("cors");
 const admin = require("firebase-admin");
 
 const { Auth } = require("../services/auth");
+const { SpotList } = require("../services/spotList");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ admin.initializeApp({
 });
 
 Auth(app, admin);
+SpotList(app, admin);
 
 // server is running
 app.listen(PORT, () => {
