@@ -11,14 +11,20 @@
         {
           "img_id": 1,
           "img_url": "https://cdn02.visitbarcelona.com/files/5531-4805-imagenCAT/BarcelonaMACBA-T24-e_O.jpg"
-        },
+        }
+      ]
+    },
+    {
+      "spot_id": 4,
+      "spot_title": "Flower spot with long title",
+      "latitude": "39.560020",
+      "longitude": "2.672816",
+      "spot_type": "Street",
+      "img_count": 1,
+      "spot_images": [
         {
-          "img_id": 2,
-          "img_url": "img 2"
-        },
-        {
-          "img_id": 3,
-          "img_url": "img 3"
+          "img_id": 7,
+          "img_url": "https://www.realityliferp.com/wp-content/uploads/2019/08/hibiscus-1520217326.jpg"
         }
       ]
     },
