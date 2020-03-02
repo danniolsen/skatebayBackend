@@ -2,7 +2,7 @@
   "name": "skatebayBackend",
   "version": "1.0.0",
   "description": "skatebay backend services",
-  "main": "index.js",
+  "main": "./server/index.js",
   "repository": "git@github.com:danniolsen/skatebayBackend.git",
   "author": "skatebay",
   "license": "MIT",
@@ -16,9 +16,12 @@
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "firebase-admin": "^8.9.2",
-    "jwt-decode": "^2.2.0"
+    "jwt-decode": "^2.2.0",
+    "pg": "^7.18.2",
+    "require": "^2.4.20"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
