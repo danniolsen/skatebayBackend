@@ -1,13 +1,12 @@
 "use-strict";
-const { GetSpotList } = require("../requests/Spots.get");
+const { GetSavedList } = require("../requests/Saved.get");
 const client = require("../../../server/db/dbConnection");
 
-const SpotList = (app, admin) => {
-  app.post("/spotlist", async (req, res) => {
-    const { user } = req.body; // user = user_id, latitude, longitude, idToken
-
+const Saved = (app, admin) => {
+  app.post("/savedlist", async (req, res) => {
+    const { user } = req.body; // user = user_id, idToken
     try {
-      let query = await GetSpotList(user);
+      let query = await GetSavedList(user);
       client().query(query, (err, result) => {
         let queryResponse = result ? result.rows : err;
         res.status(200).json(queryResponse);
@@ -18,4 +17,4 @@ const SpotList = (app, admin) => {
   });
 };
 
-module.exports = SpotList;
+module.exports = Saved;

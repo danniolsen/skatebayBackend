@@ -1,11 +1,12 @@
 "use strict";
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const admin = require("firebase-admin");
-
 const { Auth } = require("../services/auth");
 const { SpotList } = require("../services/spotList");
+const { Saved } = require("../services/saved");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,6 +32,7 @@ admin.initializeApp({
 
 Auth(app, admin);
 SpotList(app, admin);
+Saved(app, admin);
 
 // server is running
 app.listen(PORT, () => {
