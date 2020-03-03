@@ -30,17 +30,41 @@ const Saved = (app, admin) => {
   app.post("/savespot", async (req, res) => {
     const { user, spot } = req.body; // user = user_id, idToken
 
-    let query2 = await CheckSavedStatus(user, spot);
+    let queryCheck = await CheckSavedStatus(user, spot);
     let query = await SaveSpot(user, spot);
+
     client()
-      .query(query)
-      .then(result => {
-        res.status(200).json({ msg: "spot saved" });
+      .query(queryCheck)
+      .then(savedStatus => {
+        let status = savedStatus.rows[0].count;
+        if (status === "0") {
+          client()
+            .query(query)
+            .then(saved => {
+              res.status(400).json({ msg: "Spot is saved" });
+            })
+            .catch(err => {
+              res.status(400).json({ msg: "Could not save spot" });
+            });
+        } else {
+          res.status(200).json({ msg: "Spot is already saved" });
+        }
       })
       .catch(e => {
-        res.status(400).json({ msg: "error while saving spot" });
+        res.status(400).json({ msg: "Error while checkin saved status" });
       });
   });
+
+  /*
+  client()
+    .query(query)
+    .then(result => {
+      res.status(200).json({ msg: "spot saved" });
+    })
+    .catch(e => {
+      res.status(400).json({ msg: "error while saving spot" });
+    });
+  */
 
   // get list of saved spots
   app.post("/savedlist", async (req, res) => {
