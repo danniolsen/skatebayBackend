@@ -1,12 +1,36 @@
 "use-strict";
-const { GetSavedList, SaveSpot, UnsaveSpot } = require("../requests/Saved");
+const {
+  GetSavedList,
+  SaveSpot,
+  UnsaveSpot,
+  CheckSavedStatus
+} = require("../requests/Saved");
 const client = require("../../../server/db/dbConnection");
 
 const Saved = (app, admin) => {
+  app.post("/check", async (req, res) => {
+    const { spot, user } = req.body;
+    let query = await CheckSavedStatus(user, spot);
+    client()
+      .query(query)
+      .then(result => {
+        console.log(result.rows[0].count);
+        if (result.rows[0].count !== 1) {
+          res.status(200).send("do nothing");
+        } else {
+          res.status(200).send("insert spot");
+        }
+      })
+      .catch(e => {
+        res.status(400).json({ msg: "error while finding spot" });
+      });
+  });
+
   // save spot
   app.post("/savespot", async (req, res) => {
     const { user, spot } = req.body; // user = user_id, idToken
 
+    let query2 = await CheckSavedStatus(user, spot);
     let query = await SaveSpot(user, spot);
     client()
       .query(query)

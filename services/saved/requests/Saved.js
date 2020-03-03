@@ -9,6 +9,15 @@ const query = {
 return query;
 */
 
+const CheckSavedStatus = (user, spot) => {
+  const query = {
+    name: "",
+    text: `SELECT COUNT(*) FROM saved WHERE spot_fk = $1 AND user_fk = $2`,
+    values: [spot.spot_id, user.user_id]
+  };
+  return query;
+};
+
 const SaveSpot = (user, spot) => {
   const query = {
     name: "save-spot",
@@ -31,7 +40,6 @@ const GetSavedList = user => {
            order by saved.created_at desc;`,
     values: [user.user_id]
   };
-
   return query;
 };
 
@@ -45,6 +53,7 @@ const UnsaveSpot = (user, spot) => {
 };
 
 module.exports = {
+  CheckSavedStatus,
   SaveSpot,
   GetSavedList,
   UnsaveSpot
