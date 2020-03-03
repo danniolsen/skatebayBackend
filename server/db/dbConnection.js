@@ -10,7 +10,7 @@ let clientData = {
 
 const client = new Client(clientData);
 client.connect();
-console.log(clientData);
+
 module.exports = () => {
   return client;
 };
