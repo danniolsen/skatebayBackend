@@ -14,7 +14,6 @@ const Saved = (app, admin) => {
     client()
       .query(query)
       .then(result => {
-        console.log(result.rows[0].count);
         if (result.rows[0].count !== 1) {
           res.status(200).send("do nothing");
         } else {

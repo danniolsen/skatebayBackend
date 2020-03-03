@@ -27,7 +27,6 @@ const VerifyIdToken = (admin, idToken) => {
         return { code: error.code, message: error.message };
       });
   } catch (tokenError) {
-    console.log(" try catch, catch");
     return { code: tokenError.code, message: tokenError.message };
   }
 };
