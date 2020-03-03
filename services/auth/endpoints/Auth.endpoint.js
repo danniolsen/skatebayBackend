@@ -9,9 +9,9 @@ const Auth = (app, admin) => {
     const { idToken } = req.body;
 
     const user = await VerifyIdToken(admin, idToken);
-
     const getQuery = await GetUser(user);
     const createUser = await CreateUser(user);
+
     client()
       .query(getQuery)
       .then(existingUser => {
@@ -26,14 +26,20 @@ const Auth = (app, admin) => {
               res.status(200).json(newUserData);
             })
             .catch(err => {
-              res.status(500).json({ msg: "could not create user" });
+              res
+                .status(500)
+                .json({ msg: "could not create user", err: err.stack });
             });
         }
       })
       .catch(err => {
-        res.status(200).json(err);
+        res.status(200).json({});
       });
   });
 };
 
 module.exports = Auth;
+
+/*
+
+*/
