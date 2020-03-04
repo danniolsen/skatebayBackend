@@ -7,6 +7,7 @@ const admin = require("firebase-admin");
 const { Auth } = require("../services/auth");
 const { SpotList } = require("../services/spotList");
 const { Saved } = require("../services/saved");
+const { Remove } = require("../services/remove");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -30,9 +31,11 @@ admin.initializeApp({
   credential: admin.credential.cert(googleKey)
 });
 
+// endpoint access
 Auth(app, admin);
 SpotList(app, admin);
 Saved(app, admin);
+Remove(app, admin);
 
 // server is running
 app.listen(PORT, () => {

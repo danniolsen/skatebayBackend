@@ -19,10 +19,11 @@ const GetSpotList = async user => {
           FROM spots
           left join spot_types on spot_types.spot_type_id = spots.spot_id
           left join saved on saved.spot_fk = spots.spot_id and saved.user_fk = $4
+          left join removed on spots.spot_id = removed.spot_fk and removed.user_fk = $4
             ) AS spots
         ) sub
-    WHERE distance <= $3
-    ORDER BY distance asc`,
+    WHERE distance <= $3 and removed_id IS NULL
+    ORDER BY distance asc LIMIT 20`,
     values: [user.latitude, user.longitude, user.distance, user.user_id]
   };
   return query;
