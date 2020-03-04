@@ -13,7 +13,7 @@ const SpotList = (app, admin) => {
         res.status(200).json(queryResponse);
       });
     } catch (err) {
-      res.status(400).json(err);
+      res.status(400).json([]);
     }
   });
 };

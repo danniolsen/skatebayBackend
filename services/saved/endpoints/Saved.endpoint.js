@@ -13,23 +13,30 @@ const Saved = (app, admin) => {
     const { user, spot } = req.body; // user = user_id, idToken
 
     let queryCheck = await CheckSavedStatus(user, spot);
-    let query = await SaveSpot(user, spot);
-
+    let querySave = await SaveSpot(user, spot);
+    let queryUnsafe = await UnsaveSpot(user, spot);
     client()
       .query(queryCheck)
       .then(savedStatus => {
         let status = savedStatus.rows[0].count;
         if (status === "0") {
           client()
-            .query(query)
+            .query(querySave)
             .then(saved => {
-              res.status(200).json({ msg: "Spot is saved" });
+              res.status(200).json(saved);
             })
             .catch(err => {
               res.status(400).json({ msg: "Could not save spot" });
             });
         } else {
-          res.status(200).json({ msg: "Spot is already saved" });
+          client()
+            .query(queryUnsafe)
+            .then(result => {
+              res.status(200).json({ msg: "spot unsaved" });
+            })
+            .catch(e => {
+              res.status(400).json({ msg: "error while unsaving spot" });
+            });
         }
       })
       .catch(e => {
