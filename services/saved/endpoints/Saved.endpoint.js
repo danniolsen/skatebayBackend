@@ -44,17 +44,6 @@ const Saved = (app, admin) => {
       });
   });
 
-  /*
-  client()
-    .query(query)
-    .then(result => {
-      res.status(200).json({ msg: "spot saved" });
-    })
-    .catch(e => {
-      res.status(400).json({ msg: "error while saving spot" });
-    });
-  */
-
   // get list of saved spots
   app.post("/savedlist", async (req, res) => {
     const { user } = req.body; // user = user_id, idToken
@@ -68,21 +57,6 @@ const Saved = (app, admin) => {
       })
       .catch(e => {
         res.status(400).json({ msg: "Coulden't get list of saved spots" });
-      });
-  });
-
-  // unsave spot
-  app.post("/unsavespot", async (req, res) => {
-    const { user, spot } = req.body; // user = user_id, idToken
-
-    let query = await UnsaveSpot(user, spot);
-    client()
-      .query(query)
-      .then(result => {
-        res.status(200).json({ msg: "spot unsaved" });
-      })
-      .catch(e => {
-        res.status(400).json({ msg: "error while unsaving spot" });
       });
   });
 }; // endpoint function ends
