@@ -37,6 +37,10 @@ SpotList(app, admin);
 Saved(app, admin);
 Remove(app, admin);
 
+app.get("/", (req, res) => {
+  res.status(200).json("server us up");
+});
+
 // server is running
 app.listen(PORT, () => {
   console.log(`\x1b[36m%s\x1b[0m`, `Server is up on ${PORT}`);
