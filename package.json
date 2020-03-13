@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nodemon ./server/index.js",
+    "start": "./server/index.js",
     "dev": "concurrently \"npm run start\"",
     "test": "./node_modules/.bin/mocha --exit"
   },
