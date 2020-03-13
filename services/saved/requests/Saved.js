@@ -52,9 +52,19 @@ const UnsaveSpot = (user, spot) => {
   return query;
 };
 
+const GetSaveCount = spot_id => {
+  const query = {
+    name: "get-save-count",
+    text: `SELECT COUNT(*) FROM saved WHERE spot_fk = $1`,
+    values: [spot_id]
+  };
+  return query;
+};
+
 module.exports = {
   CheckSavedStatus,
   SaveSpot,
   GetSavedList,
-  UnsaveSpot
+  UnsaveSpot,
+  GetSaveCount
 };
