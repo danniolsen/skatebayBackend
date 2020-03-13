@@ -57,7 +57,7 @@ const Saved = (app, admin) => {
         res.status(200).json(queryResponse);
       })
       .catch(e => {
-        res.status(400).json({ msg: "Coulden't get list of saved spots" });
+        res.status(400).json({ msg: e.stack });
       });
   });
 
