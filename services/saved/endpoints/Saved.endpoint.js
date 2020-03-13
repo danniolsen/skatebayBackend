@@ -3,7 +3,8 @@ const {
   GetSavedList,
   SaveSpot,
   UnsaveSpot,
-  CheckSavedStatus
+  CheckSavedStatus,
+  GetSaveCount
 } = require("../requests/Saved");
 const client = require("../../../server/db/dbConnection");
 
@@ -57,6 +58,22 @@ const Saved = (app, admin) => {
       })
       .catch(e => {
         res.status(400).json({ msg: "Coulden't get list of saved spots" });
+      });
+  });
+
+  // get number of times a spot has been savedlist
+  app.post("/savecount", async (req, res) => {
+    const { spot_id } = req.body;
+
+    let query = await GetSaveCount(spot_id);
+    client()
+      .query(query)
+      .then(result => {
+        let queryResponse = result ? result.rows : [];
+        res.status(200).json(queryResponse);
+      })
+      .catch(err => {
+        res.status(200).json(err.stack);
       });
   });
 }; // endpoint function ends
