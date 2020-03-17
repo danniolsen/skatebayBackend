@@ -8,6 +8,7 @@ const { Auth } = require("../services/auth");
 const { SpotList } = require("../services/spotList");
 const { Saved } = require("../services/saved");
 const { Remove } = require("../services/remove");
+const { Moderation } = require("../services/moderation");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +37,7 @@ Auth(app, admin);
 SpotList(app, admin);
 Saved(app, admin);
 Remove(app, admin);
+Moderation(app, admin);
 
 app.get("/", (req, res) => {
   res.status(200).json("server us up");
