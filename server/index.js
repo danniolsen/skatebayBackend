@@ -3,17 +3,22 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const multer = require("multer");
+const fs = require("fs");
 const admin = require("firebase-admin");
 const { Auth } = require("../services/auth");
 const { SpotList } = require("../services/spotList");
 const { Saved } = require("../services/saved");
 const { Remove } = require("../services/remove");
 const { Moderation } = require("../services/moderation");
+const { CreateSpot } = require("../services/createSpot");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 app.use("*", function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -22,7 +27,6 @@ app.use("*", function(req, res, next) {
   next();
 });
 app.options("*", cors());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 const googleKey =
   process.env.GOOGLE_APPLICATION_CREDENTIALS ||
@@ -38,10 +42,7 @@ SpotList(app, admin);
 Saved(app, admin);
 Remove(app, admin);
 Moderation(app, admin);
-
-app.get("/", (req, res) => {
-  res.status(200).json("server us up");
-});
+CreateSpot(app, admin, multer, fs);
 
 // server is running
 app.listen(PORT, () => {

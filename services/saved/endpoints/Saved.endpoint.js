@@ -54,10 +54,11 @@ const Saved = (app, admin) => {
       .query(query)
       .then(result => {
         let queryResponse = result ? result.rows : [];
+
         res.status(200).json(queryResponse);
       })
       .catch(e => {
-        res.status(400).json({ msg: e.stack });
+        res.status(400).json({ msg: e });
       });
   });
 
