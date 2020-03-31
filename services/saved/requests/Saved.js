@@ -33,10 +33,9 @@ const SaveSpot = (user, spot) => {
 const GetSavedList = user => {
   const query = {
     name: "get-saved-spots",
-    text: `select spots.*, spot_types.spot_type
+    text: `select *
            from saved
            left join spots on spots.spot_id = saved.spot_fk
-           left join spot_types on spots.spot_type_fk = spot_types.spot_type_id
            where saved.user_fk = $1
            order by saved.created_at desc;`,
     values: [user.user_id]
