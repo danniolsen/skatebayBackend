@@ -23,6 +23,7 @@ const Auth = (app, admin) => {
             .query(createUser)
             .then(newUser => {
               let newUserData = newUser.rows[0];
+              console.log(newUserData);
               res.status(200).json(newUserData);
             })
             .catch(err => {

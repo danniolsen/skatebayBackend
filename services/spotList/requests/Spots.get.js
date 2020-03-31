@@ -30,7 +30,7 @@ const GetSpotList = async user => {
 
 const GetUploads = async user => {
   const query = {
-    name: "get-spotlist",
+    name: "get-uploaded-spots",
     text: `select * from spots where user_fk = $1 order by spot_created_at DESC`,
     values: [user.user_id]
   };
