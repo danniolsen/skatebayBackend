@@ -33,9 +33,7 @@ const CreateSpot = (app, admin, multer, fs) => {
     };
 
     const removeFile = file => {
-      fs.unlink(file.path, err => {
-        // finish this, or move to frontend
-      });
+      fs.unlink(file.path, err => {});
     };
 
     const uploadMultipleFiles = (fileList, spot_id) => {
@@ -43,10 +41,14 @@ const CreateSpot = (app, admin, multer, fs) => {
       //const removes = fileList.map(removeFile);  , removes
       Promise.all(uploads)
         .then(results => {
+          console.log("spot images uploaded");
           return activateSpot(spot_id);
         })
         .catch(err => {
           return null;
+        })
+        .finally(fin => {
+          fileList.map(removeFile);
         });
     };
 
