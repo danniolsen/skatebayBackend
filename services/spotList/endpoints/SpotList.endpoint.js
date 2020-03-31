@@ -29,7 +29,6 @@ const SpotList = (app, admin) => {
       client().query(query, (err, result) => {
         console.log(result);
         let queryResponse = result ? result.rows : [];
-        //console.log("uploads ", queryResponse);
         res.status(200).json(queryResponse);
       });
     } catch (err) {
