@@ -41,7 +41,6 @@ const CreateSpot = (app, admin, multer, fs) => {
       //const removes = fileList.map(removeFile);  , removes
       Promise.all(uploads)
         .then(results => {
-          console.log("spot images uploaded");
           return activateSpot(spot_id);
         })
         .catch(err => {

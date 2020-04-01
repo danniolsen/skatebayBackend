@@ -31,7 +31,6 @@ const SpotList = (app, admin) => {
         res.status(200).json(queryResponse);
       })
       .catch(e => {
-        console.log(e);
         res.status(400).json([]);
       });
   });

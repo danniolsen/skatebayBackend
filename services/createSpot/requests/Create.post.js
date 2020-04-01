@@ -12,16 +12,12 @@ const UploadSpot = (spot, user) => {
   const { user_id } = user.user;
   const { latitude, longitude } = location;
 
+  let jsonTags = JSON.stringify(tags);
+
   let imgNames = [];
   images.map((img, i) => {
     let newName = `skatebay-spot-${i}.jpg`;
     imgNames.push(newName);
-  });
-
-  let newTags = [];
-  tags.map((tag, i) => {
-    let tagid = tag.id;
-    newTags.push(tagid);
   });
 
   const query = {
@@ -29,7 +25,7 @@ const UploadSpot = (spot, user) => {
     text: `INSERT INTO spots
     (spot_title, latitude, longitude, user_fk, tags, spot_images)
     VALUES ($1,$2,$3,$4,$5,$6) RETURNING spot_id`,
-    values: [title, latitude, longitude, user_id, newTags, imgNames]
+    values: [title, latitude, longitude, user_id, jsonTags, imgNames]
   };
   return query;
 };
