@@ -11,7 +11,6 @@ const User = (app, admin) => {
       .query(query)
       .then(result => {
         let queryResponse = result.rows.length !== 0 ? result.rows : {};
-        console.log(queryResponse);
         res.status(200).json(queryResponse[0]);
       })
       .catch(e => {
