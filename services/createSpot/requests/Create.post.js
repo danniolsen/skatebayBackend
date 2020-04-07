@@ -26,7 +26,7 @@ const UploadSpot = (spot, user) => {
   const query = {
     name: "upload-spot",
     text: `INSERT INTO spots
-    (spot_title, latitude, longitude, user_fk, tags, spot_images)
+    (spot_title, latitude, longitude, spots_user_fk, tags, spot_images)
     VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
     values: [title, latitude, longitude, user_id, jsonTags, imgNames]
   };

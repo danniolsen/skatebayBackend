@@ -8,7 +8,7 @@
 const GetSpotList = async user => {
   const query = {
     name: "get-spotlist",
-    text: `SELECT spot_id, spot_title, spot_images, distance, latitude, tags, longitude, spot_created_at, saved_id as saved
+    text: `SELECT spot_id, spot_title, spot_images, distance, latitude, tags, longitude, spot_created_at, spots_user_fk, saved_id as saved
     FROM (
         SELECT *,
             (6371 * acos( cos( radians($1) ) * cos( radians( spots.latitude ) )
@@ -31,7 +31,7 @@ const GetSpotList = async user => {
 const GetUploads = async user => {
   const query = {
     name: "get-uploaded-spots",
-    text: `select * from spots where user_fk = $1 order by spot_created_at DESC`,
+    text: `select * from spots where spots_user_fk = $1 order by spot_created_at DESC`,
     values: [user.user_id]
   };
   return query;
