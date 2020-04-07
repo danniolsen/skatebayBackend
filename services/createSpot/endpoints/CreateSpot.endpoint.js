@@ -41,6 +41,7 @@ const CreateSpot = (app, admin, multer, fs) => {
       //const removes = fileList.map(removeFile);  , removes
       Promise.all(uploads)
         .then(results => {
+          console.log(results);
           return activateSpot(spot_id);
         })
         .catch(err => {
@@ -82,7 +83,8 @@ const CreateSpot = (app, admin, multer, fs) => {
     let response = {
       spot_id: null,
       status: false,
-      msg: null
+      msg: null,
+      images: []
     };
 
     client()
@@ -92,10 +94,12 @@ const CreateSpot = (app, admin, multer, fs) => {
         responseSuccess.spot_id = result.rows[0].spot_id;
         responseSuccess.status = true;
         responseSuccess.msg = "Spot has been uploaded successfully";
+        responseSuccess.images = result.rows[0].spot_images;
         res.status(200).json(responseSuccess);
       })
       .catch(e => {
         let responseError = Object.assign({}, response);
+        console.log(e);
         responseError.msg = "An error has occured! try again later";
         res.status(400).json(responseError);
       });

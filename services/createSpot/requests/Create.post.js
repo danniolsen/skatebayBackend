@@ -16,7 +16,10 @@ const UploadSpot = (spot, user) => {
 
   let imgNames = [];
   images.map((img, i) => {
-    let newName = `skatebay-spot-${i}.jpg`;
+    let ran = Math.random()
+      .toString(36)
+      .substring(2, 8);
+    let newName = `skatebay-spot-${i}-${ran}.jpg`;
     imgNames.push(newName);
   });
 
@@ -24,7 +27,7 @@ const UploadSpot = (spot, user) => {
     name: "upload-spot",
     text: `INSERT INTO spots
     (spot_title, latitude, longitude, user_fk, tags, spot_images)
-    VALUES ($1,$2,$3,$4,$5,$6) RETURNING spot_id`,
+    VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
     values: [title, latitude, longitude, user_id, jsonTags, imgNames]
   };
   return query;
