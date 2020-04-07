@@ -12,6 +12,7 @@ const { Saved } = require("../services/saved");
 const { Remove } = require("../services/remove");
 const { Moderation } = require("../services/moderation");
 const { CreateSpot } = require("../services/createSpot");
+const { User } = require("../services/user");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -43,19 +44,7 @@ Saved(app, admin);
 Remove(app, admin);
 Moderation(app, admin);
 CreateSpot(app, admin, multer, fs);
-
-const client = require("./db/dbConnection");
-app.get("/dummy", (req, res) => {
-  client()
-    .query("select * from arrayTesting")
-    .then(result => {
-      let queryResponse = result.rows ? result.rows : [{ id: 0, name: "nope" }];
-      res.status(200).json(queryResponse);
-    })
-    .catch(err => {
-      res.status(400).json({ msg: "error" });
-    });
-});
+User(app, admin);
 
 // server is running
 app.listen(PORT, () => {
