@@ -19,12 +19,12 @@ const CreateSpot = (app, admin, multer, fs) => {
   // endpoint for uploading images
   app.post("/uploadSpotImages", upload.array("spotimage", max), (req, res) => {
     const bucket = admin.storage().bucket(process.env.BUCKET);
-    const { spot_id } = req.body;
+    const { spot_id, uuid } = req.body;
 
     //fs.unlink(req.file.path, (err) =>
     const uploadFile = file => {
       return bucket.upload(file.path, {
-        destination: `${spot_id}/${file.originalname}`,
+        destination: `${uuid}/${file.originalname}`,
         gzip: true,
         metadata: {
           cacheControl: "public, max-age=31536000"
@@ -41,7 +41,6 @@ const CreateSpot = (app, admin, multer, fs) => {
       //const removes = fileList.map(removeFile);  , removes
       Promise.all(uploads)
         .then(results => {
-          console.log(results);
           return activateSpot(spot_id);
         })
         .catch(err => {
@@ -82,6 +81,7 @@ const CreateSpot = (app, admin, multer, fs) => {
     const query = await UploadSpot(spot, user);
     let response = {
       spot_id: null,
+      uuid: null,
       status: false,
       msg: null,
       images: []
@@ -92,6 +92,7 @@ const CreateSpot = (app, admin, multer, fs) => {
       .then(result => {
         let responseSuccess = Object.assign({}, response);
         responseSuccess.spot_id = result.rows[0].spot_id;
+        responseSuccess.uuid = result.rows[0].uuid;
         responseSuccess.status = true;
         responseSuccess.msg = "Spot has been uploaded successfully";
         responseSuccess.images = result.rows[0].spot_images;

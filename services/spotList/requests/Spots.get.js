@@ -8,7 +8,7 @@
 const GetSpotList = async user => {
   const query = {
     name: "get-spotlist",
-    text: `SELECT spot_id, spot_title, spot_images, distance, latitude, tags, longitude, spot_created_at, spots_user_fk, saved_id as saved
+    text: `SELECT uuid, spot_id, spot_title, spot_images, distance, latitude, tags, longitude, spot_created_at, spots_user_fk, saved_id as saved
     FROM (
         SELECT *,
             (6371 * acos( cos( radians($1) ) * cos( radians( spots.latitude ) )
